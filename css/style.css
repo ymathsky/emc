@@ -709,33 +709,15 @@ input, textarea, select { font-family: inherit; font-size: 1rem; }
 .packages-section .section-header {
   margin-bottom: 56px;
 }
+/* 6-column grid: each card spans 2 cols → 3 per row.
+   Cards 4 & 5 are offset so the bottom row is centred. */
 .packages-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: 24px;
 }
-/* last two cards centered when row has 2 items */
-.packages-grid .package-card:nth-child(4) {
-  grid-column: 1;
-}
-.packages-grid .package-card:nth-child(4),
-.packages-grid .package-card:nth-child(5) {
-  grid-column: auto;
-}
-/* Center the bottom row of 2 */
-@supports (display: grid) {
-  .packages-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  .packages-grid .package-card:nth-child(4) {
-    grid-column: 1 / 2;
-    margin-left: calc(50% + 12px);
-  }
-  .packages-grid .package-card:nth-child(n+4) {
-    grid-column: auto;
-  }
-}
 .package-card {
+  grid-column: span 2;
   background: rgba(255,255,255,0.05);
   border: 1px solid rgba(201,168,76,0.2);
   border-radius: var(--radius);
@@ -745,6 +727,10 @@ input, textarea, select { font-family: inherit; font-size: 1rem; }
   position: relative;
   overflow: hidden;
 }
+/* Centre the last two cards in the second row */
+.packages-grid .package-card:nth-child(4) { grid-column: 2 / 4; }
+.packages-grid .package-card:nth-child(5) { grid-column: 4 / 6; }
+
 .package-card::after {
   content: '';
   position: absolute;
@@ -760,9 +746,7 @@ input, textarea, select { font-family: inherit; font-size: 1rem; }
   transform: translateY(-6px);
   box-shadow: 0 16px 48px rgba(0,0,0,0.3);
 }
-.package-card:hover::after {
-  transform: scaleX(1);
-}
+.package-card:hover::after { transform: scaleX(1); }
 .package-icon {
   font-size: 2.8rem;
   margin-bottom: 18px;
@@ -792,20 +776,19 @@ input, textarea, select { font-family: inherit; font-size: 1rem; }
   padding: 5px 14px;
   border-radius: 20px;
 }
-
 @media (max-width: 1024px) {
   .packages-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  .packages-grid .package-card:nth-child(4) {
-    margin-left: 0;
-    grid-column: auto;
+  .package-card,
+  .packages-grid .package-card:nth-child(4),
+  .packages-grid .package-card:nth-child(5) {
+    grid-column: span 1;
   }
 }
 @media (max-width: 600px) {
-  .packages-grid {
-    grid-template-columns: 1fr;
-  }
+  .packages-grid { grid-template-columns: 1fr; }
+  .package-card { grid-column: 1; }
 }
 
 /* ================= MAP ================= */
