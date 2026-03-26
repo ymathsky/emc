@@ -1,0 +1,20 @@
+# Node dependencies (only needed locally for HEIC conversion)
+node_modules/
+package-lock.json
+
+# Original HEIC source files (large, not needed on server)
+*.HEIC
+*.heic
+
+# Conversion script (local tool only)
+convert-images.js
+package.json
+
+# Original zip/folder from Google Drive
+*.zip
+Sir Raymart-20260325T120025Z-3-001/
+
+# OS / Editor files
+.DS_Store
+Thumbs.db
+.vscode/
